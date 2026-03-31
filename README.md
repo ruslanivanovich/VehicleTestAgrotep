@@ -8,7 +8,8 @@
 ## 🔹 Стек технологій
 
 - **React** (функціональні компоненти, hooks)  
-- **React Router** (AppRouter)  
+- **React Router** (AppRouter)
+- **State Menegment** (useState, useEffect)
 - **Styled Components** (GlobalStyle, теми light/dark)  
 - **JavaScript / ES6+**  
 - **Vite**
