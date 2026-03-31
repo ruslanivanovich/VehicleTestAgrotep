@@ -40,6 +40,6 @@ npm run dev/ npm start
 🔹 Контакти
 
 Автор: Руслан Тепленко
-GitHub: [https://github.com/ruslanivanovich](https://github.com/ruslanivanovich)
+GitHub:https://github.com/ruslanivanovich
 
 Email: ruslanteplenko15@gmail.com
