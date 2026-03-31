@@ -1,16 +1,45 @@
-# React + Vite
+# Vehicle Test Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Тестовий проєкт для вакансії Front-end Developer.  
+Цей проєкт демонструє роботу з React, маршрутизацією, темізацією (light/dark) та Styled Components.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🔹 Стек технологій
 
-## React Compiler
+- **React** (функціональні компоненти, hooks)  
+- **React Router** (AppRouter)  
+- **Styled Components** (GlobalStyle, теми light/dark)  
+- **JavaScript / ES6+**  
+- **Vite**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🔹 Функціонал
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Перемикання теми (light / dark) збереженням у `localStorage`  
+- Галерея автомобілів з базовими даними (brand, model, year, color, VIN)  
+- Навігація по сторінках через React Router  
+- Сортування по кожному із заголовків таблиці   
+
+---
+
+## 🔹 Інструкція по запуску
+
+1. Клонуємо репозиторій:
+
+```bash
+git clone https://github.com/ruslanivanovich/VehicleTestAgrotep.git
+2. Заходимо в папку проєкту:
+cd VehicleTestAgrotep
+3. Встановлюємо залежності:
+npm install
+4. Запускаємо:
+npm run dev/ npm start
+
+🔹 Контакти
+
+Автор: Руслан Тепленко
+GitHub: [https://github.com/ruslanivanovich](https://github.com/ruslanivanovich)
+
+Email: ruslanteplenko15@gmail.com
