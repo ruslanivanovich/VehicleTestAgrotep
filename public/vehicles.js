@@ -46,7 +46,7 @@ const vehicles = [
         title: "Truck updated",
         date: "2026-02-20T10:24:00",
         user: "Andrii Ivanov",
-        userImage: 'https://w7.pngwing.com/pngs/842/134/png-transparent-avatar-face-man-boy-male-profile-smiley-avatar-icon.png',
+        userImage: '../src/assets/vehicles/actrosMB.png',
         email: 'andriivanov@gmail.com'
       },
       {
