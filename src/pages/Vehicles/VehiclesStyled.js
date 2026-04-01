@@ -13,10 +13,19 @@ export const MenuWrapper = styled.div`
   gap:20px;
   max-width:1280px;
   margin:0 auto;
+  @media (max-width: 1024px) {
+  max-width:900px;
+}
+    @media (max-width: 768px) {
+    flex-direction: column; 
+  }
 `;
 
 export const Location = styled.div`
-  width: 1000px;
+  flex: 1;
+  min-width:0;
+
+  
   padding: 30px;
   display:flex;
   gap:10px;
@@ -26,6 +35,14 @@ export const Location = styled.div`
 
   background-color: ${({ theme }) => theme.cardBg};
   color: ${({ theme }) => theme.text};
+   @media (max-width: 1024px) {
+
+}
+   @media(max-width:768px){
+
+   
+   }
+
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -59,11 +76,19 @@ export const TopMenu = styled.div`
   flex-direction:column;
   align-items:center;
   gap:40px;
+  @media (max-width: 1024px) {
+   gap:20px;
+}
+     @media (max-width: 768px) {
+    flex-direction: row; 
+    gap: 20px;
+  }
 `;
 
 export const HeaderTopBar = styled.div`
   display:flex;
   align-items:center;
+  min-width: 0;
   gap:20px;
   margin-top:20px;
 `;
@@ -82,6 +107,7 @@ export const TableWrapper = styled.div`
   background: ${({ theme }) => theme.cardBg};
   border-radius: 12px;
   margin-top: 40px;
+   overflow-x: auto;
   padding: 20px;
   box-shadow: ${({ theme }) => theme.shadow};
 `;
@@ -112,6 +138,10 @@ const variants = {
 
 export const Title = styled.h2`
   font-size: 20px;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  min-width:0;
   color: ${({ theme }) => theme.text};
 `;
 
@@ -144,10 +174,17 @@ export const Button = styled.button`
 `;
 
 export const StyledTable = styled.table`
-  width: 100%;
+  
+width: 100%;
   border-collapse: collapse;
   border-radius:10px;
+   min-width: 700px;
+ 
   overflow:hidden;
+  @media(max-width:768px){
+
+  
+  }
 `;
 
 export const THead = styled.thead`
@@ -168,6 +205,10 @@ export const Td = styled.td`
   border-top: 1px solid ${({ theme }) => theme.border};
   font-size: 16px;
   color: ${({ theme }) => theme.text};
+  @media (max-width: 768px) {
+    padding: 10px;
+    font-size: 14px;
+  }
 `;
 
 export const Tr = styled.tr`
@@ -188,6 +229,10 @@ export const VehicleCell = styled.div`
 export const VehicleImage = styled.img`
   width: 80px;
   height: 60px;
+   @media (max-width: 768px) {
+    width: 50px;
+    height: 40px;
+  }
 `;
 
 export const ColorBadge = styled.div`
@@ -242,9 +287,18 @@ export const SideBar = styled.div`
   width:50px;
   padding:10px;
   border-radius:10px;
+  @media (max-width: 768px) {
+    flex-direction: row; 
+    width: 100%;
+    height: auto;
+    align-items: center;
+  }
 `;
 
-export const TopBar = styled.div``;
+export const TopBar = styled.div`
+ flex: 1;
+  min-width: 0; 
+`;
 
 export const IconWrapper = styled.div`
   display:flex;
@@ -258,5 +312,9 @@ export const IconWrapper = styled.div`
 
   &:hover {
     color: ${({ theme }) => theme.text};
+  }
+     @media (max-width: 768px) {
+    flex-direction: row; 
+    gap: 5px;
   }
 `;
