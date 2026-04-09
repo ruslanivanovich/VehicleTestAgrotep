@@ -17,13 +17,10 @@ export const CloseIcon = styled(Close)`
 export const ModalWrapper = styled.div`
   position: fixed;
   inset: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 100;
-
   background-color: rgba(0, 0, 0, 0.5); /* трохи темніше — краще виглядає */
   padding: 30px;
   box-sizing: border-box;
@@ -32,16 +29,12 @@ export const ModalWrapper = styled.div`
 export const Modal = styled.div`
   position: relative;
   overflow: hidden auto;
-
   width: 700px;
   max-width: 100%;
-
   background-color: ${({ theme }) => theme.card};
   color: ${({ theme }) => theme.text};
-
   padding: 30px;
   border-radius: 16px;
-
   box-shadow: ${({ theme }) => theme.shadow};
 `;
 

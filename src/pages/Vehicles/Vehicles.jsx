@@ -4,6 +4,9 @@ import { useState } from "react";
 import ArrowDownIcon from '../../assets/svg/arrow-down.svg?react'
 import ArrowUpIcon from '../../assets/svg/arrow-up.svg?react'
 import ModalWindow from "../Modal/Modal";
+import { openTypeModal,closeModal } from "../../store/appslice";
+import { useSelector,useDispatch } from "react-redux";
+import { openModal,title } from "../../store/selectors";
 import {
   TableHeader,
   Button,
@@ -24,10 +27,15 @@ import {
 export default function Vehicles() {
   const navigate = useNavigate()
   const [sortField, setSortField] = useState(null)
-  const [modal,setModal] = useState(false)
+  const modal = useSelector(openModal)
+  const titleModal = useSelector(title)
+  const dispatch = useDispatch()
   const [sortOrder, setSortOrder] = useState('asc')
-  function closeModal(){
-    setModal(!modal)
+  function closeModalka(){
+    dispatch(closeModal())
+  }
+  function openAddVehicleModal(){
+    dispatch(openTypeModal('Do you want to add vehicle(this functionality is not working yet)'))
   }
   function handleSort(field) {
     if (sortField === field) {
@@ -96,9 +104,9 @@ export default function Vehicles() {
     <TableWrapper>
 
       <TableHeader>
-        {modal && (<ModalWindow closeModal={closeModal} title='Do you want to add vehicle(this functionality is not working yet)'/>)}
+        {modal && (<ModalWindow closeModal={closeModalka} title={titleModal}/>)}
         <Title>Vehicles</Title>
-        <Button variant='primary' onClick={()=> closeModal()}>+ Add Vehicle</Button>
+        <Button variant='primary' onClick={()=> openAddVehicleModal()}>+ Add Vehicle</Button>
       </TableHeader>
       <StyledTable>
         <THead>

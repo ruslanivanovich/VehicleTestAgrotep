@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import vehicles from "../../../public/vehicles";
 import { Title } from "../Vehicles/VehiclesStyled";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,10 @@ import HealthIcon from '../../assets/svg/wrench.svg?react'
 import ModalWindow from "../Modal/Modal";
 import { Button } from "../Vehicles/VehiclesStyled";
 import PlusIcon from '../../assets/svg/plus.svg?react'
+import { openTypeModal,closeModal } from "../../store/appslice";
+import { useDispatch,useSelector } from "react-redux";
+import { title,openModal} from "../../store/selectors";
+
 import {
     OverviewWrapper,
     Documents,
@@ -36,26 +40,16 @@ import {
 } from './Overview.styled'
 
 export default function Overview() {
+    const dispatch = useDispatch();
+    const titleModal = useSelector(title);
+    const modal = useSelector(openModal);
+
     const { id } = useParams()
-    const [modal, setModal] = useState({
-        isOpen: false,
-        title: ''
-    })
     function openAddModal() {
-        setModal({
-            isOpen: true,
-            title: 'Do you want to add document?(this functionality is not working yet)'
-
-        })
+        dispatch(openTypeModal('Do you want to add document?(this functionality is not working yet)'))
     }
-    function closeModal() {
-        setModal(prev => ({
-            ...prev,
-            isOpen: false
-        })
-
-
-        )
+    function closeModalka() {
+        dispatch(closeModal())
     }
 
     const filteredVehicle = vehicles.filter(v => v.id === +id)
@@ -75,9 +69,9 @@ export default function Overview() {
                     v.documents.map(d =>
                         <React.Fragment key={d.id}>
                             <Police>
-                                {modal.isOpen && (
-                                    <ModalWindow closeModal={closeModal}
-                                    title={modal.title}/>
+                                {modal && (
+                                    <ModalWindow closeModal={closeModalka}
+                                    title={titleModal}/>
                                 )}
                                 <PoliceInfo>
                                     <File />

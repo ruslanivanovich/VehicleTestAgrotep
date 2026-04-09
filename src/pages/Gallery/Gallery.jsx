@@ -3,6 +3,9 @@ import vehicles from "../../../public/vehicles";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { Title } from "../Vehicles/VehiclesStyled";
+import { closeModal } from "../../store/appslice";
+import { openModal } from "../../store/selectors";
+import { useDispatch ,useSelector} from "react-redux";
 
 import ModalWindow from "../Modal/Modal";
 import {
@@ -16,12 +19,13 @@ import {
 
 export default function GalleryVehicle() {
     const { id } = useParams()
+    const dispatch = useDispatch()
+    const modal = useSelector(openModal)
     const filteredVehicle = vehicles.find(v => v.id === +id)
     const [vehicle, setVehicle] = useState(filteredVehicle)
     const [activeIndex, setActiveIndex] = useState(null);
-    const [modal, setModal] = useState(false)
-    function closeModal() {
-        setModal(!modal)
+    function closeModalka() {
+        dispatch(closeModal())
     }
     function nextImg() {
         setActiveIndex(prev =>
@@ -58,7 +62,7 @@ export default function GalleryVehicle() {
                             <GalleryItem size={g.size}>
                                 <Close onClick={() => deleteImg(g.id)} />
                                 <img onClick={() => {
-                                    closeModal();
+                                    closeModalka();
                                     setActiveIndex(index)
                                 }} src={g.url} alt="vehicle photo" />
                             </GalleryItem>
@@ -68,7 +72,7 @@ export default function GalleryVehicle() {
                 </GalleryWrapper>
                 {modal && activeIndex !== null && (
                     <ModalWindow
-                        closeModal={closeModal}
+                        closeModal={closeModalka}
                         children={<img src={vehicle.gallery[activeIndex].url} />}
                         prevImg={()=>
                             prevImg()}

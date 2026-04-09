@@ -1,13 +1,15 @@
 import React from "react";
 import vehicles from "../../../public/vehicles";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import { Button, Title } from "../Vehicles/VehiclesStyled";
 import PencilIcon from '../../assets/svg/pencil.svg?react'
 import Trash from '../../assets/svg/trash.svg?react'
 import { Outlet } from "react-router-dom";
 import ModalWindow from "../Modal/Modal";
 import Refresh from '../../assets/svg/refresh-cw.svg?react'
+import { openModal, title } from "../../store/selectors";
+import { closeModal, openTypeModal } from "../../store/appslice";
+import { useSelector, useDispatch } from "react-redux";
 import {
     VehicleCard,
     VehicleCardContent,
@@ -27,35 +29,22 @@ import {
 
 export default function LayoutPage() {
     const { id } = useParams()
-    const [modal, setModal] = useState({
-        open: false,
-        title: ''
-    })
+    const modal = useSelector(openModal)
+    const titleModal = useSelector(title)
+    const dispatch = useDispatch()
+
     function openDeleteModal() {
-        setModal({
-            open: true,
-            title: 'Do you really want to delete this vehicle?(this functionality is not working yet)'
-        });
+        dispatch(openTypeModal('Do you really want to delete this vehicle?(this functionality is not working yet)'))
     }
-
     function openEditModal() {
-        setModal({
-            open: true,
-            title: 'Edit vehicle(this functionality is not working yet)'
-        });
+       dispatch(openTypeModal('Edit vehicle(this functionality is not working yet)'))
     }
-     function openNoticeModal() {
-        setModal({
-            open: true,
-            title: 'Do you want to add this notice?(this functionality is not working yet)'
-
-        })
+    function openNoticeModal() {
+        dispatch(openTypeModal('Do you want to add this notice?(this functionality is not working yet)'))
     }
-    function closeModal() {
-        setModal(prev => ({
-            ...prev,
-            open: false
-        }));
+    function closeModalka() {
+        dispatch(closeModal())
+       
     }
     const filteredVehicle = vehicles.filter(v => v.id === +id)
     return (
@@ -72,12 +61,12 @@ export default function LayoutPage() {
 
                 return (
                     <React.Fragment key={v.id}>
-                            {modal.open && (
-                                <ModalWindow
-                                    closeModal={closeModal}
-                                    title={modal.title}
-                                />
-                            )}
+                        {modal && (
+                            <ModalWindow
+                                closeModal={closeModalka}
+                                title={titleModal}
+                            />
+                        )}
                         <VehicleCardHeader>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                 <Truck />
@@ -118,7 +107,7 @@ export default function LayoutPage() {
                                         </div>
                                     ))}
                                     <AddNotice>
-                                        <Button variant='notice' onClick={()=>openNoticeModal()}>
+                                        <Button variant='notice' onClick={() => openNoticeModal()}>
                                             <Refresh /> Add Note
                                         </Button>
                                         <NoteText>
