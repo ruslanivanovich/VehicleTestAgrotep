@@ -37,14 +37,14 @@ export default function LayoutPage() {
         dispatch(openTypeModal('Do you really want to delete this vehicle?(this functionality is not working yet)'))
     }
     function openEditModal() {
-       dispatch(openTypeModal('Edit vehicle(this functionality is not working yet)'))
+        dispatch(openTypeModal('Edit vehicle(this functionality is not working yet)'))
     }
     function openNoticeModal() {
         dispatch(openTypeModal('Do you want to add this notice?(this functionality is not working yet)'))
     }
     function closeModalka() {
         dispatch(closeModal())
-       
+
     }
     const filteredVehicle = vehicles.filter(v => v.id === +id)
     return (
@@ -74,8 +74,17 @@ export default function LayoutPage() {
                             </div>
 
                             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                <Button variant='primary' onClick={() => openEditModal()}><PencilIcon /> Edit</Button>
-                                <Button variant='delete' onClick={() => openDeleteModal()}><Trash /> Delete</Button>
+                                <Button variant='primary' onClick={(e) => {
+                                    openEditModal();
+                                    e.stopPropagation();
+
+                                }
+                                }><PencilIcon /> Edit</Button>
+                                <Button variant='delete' onClick={(e) => {
+                                    openDeleteModal();
+                                    e.stopPropagation();
+
+                                }}><Trash /> Delete</Button>
                             </div>
                         </VehicleCardHeader>
 

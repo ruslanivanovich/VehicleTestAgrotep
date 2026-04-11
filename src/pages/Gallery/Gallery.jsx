@@ -28,6 +28,7 @@ export default function GalleryVehicle() {
     const activeIndex = useSelector(activeInd)
     function closeModalka() {
         dispatch(closeModal())
+        dispatch(setActiveIndex(null))
     }
     function nextImg() {
         dispatch(nextIndex())
@@ -49,10 +50,14 @@ export default function GalleryVehicle() {
                     {filteredV?.gallery?.map((g, index) =>
                         <React.Fragment key={g.id} >
                             <GalleryItem size={g.size}>
-                                <Close onClick={() => deleteImage(g.id)} />
-                                <img onClick={() => {
+                                <Close onClick={(e) => {
+                                    e.stopPropagation();
+                                    deleteImage(g.id);
+                                }} />
+                                <img onClick={(e) => {
+                                    e.stopPropagation();
                                     closeModalka();
-                                    dispatch(setActiveIndex(index))
+                                    dispatch(setActiveIndex(index));
                                 }} src={g.url} alt="vehicle photo" />
                             </GalleryItem>
                         </React.Fragment>
