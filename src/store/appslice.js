@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isOpen: false,
-    title: ''
+    title: '',
 }
 
 export const appSlice = createSlice({
@@ -15,7 +15,7 @@ export const appSlice = createSlice({
         closeModal:(state)=>{
             state.isOpen = !state.isOpen
         }
-    }
+    },
 })
 
 export const {openTypeModal,closeModal} = appSlice.actions

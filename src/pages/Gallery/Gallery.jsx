@@ -1,11 +1,11 @@
 import React from "react";
-import vehicles from "../../../public/vehicles";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect } from "react";
 import { Title } from "../Vehicles/VehiclesStyled";
 import { closeModal } from "../../store/appslice";
-import { openModal } from "../../store/selectors";
-import { useDispatch ,useSelector} from "react-redux";
+import { openModal, activeInd, filteredVehicles } from "../../store/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { nextIndex, prevIndex, deleteImg, filteredVehicle, setActiveIndex } from "../../store/galleryslice";
 
 import ModalWindow from "../Modal/Modal";
 import {
@@ -21,33 +21,22 @@ export default function GalleryVehicle() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const modal = useSelector(openModal)
-    const filteredVehicle = vehicles.find(v => v.id === +id)
-    const [vehicle, setVehicle] = useState(filteredVehicle)
-    const [activeIndex, setActiveIndex] = useState(null);
+    useEffect(() => {
+         dispatch(filteredVehicle(id))
+    }, [id, dispatch])
+    const filteredV = useSelector(filteredVehicles)
+    const activeIndex = useSelector(activeInd)
     function closeModalka() {
         dispatch(closeModal())
     }
     function nextImg() {
-        setActiveIndex(prev =>
-            prev === vehicle.gallery.length - 1 ? 0 : prev + 1
-        )
-
+        dispatch(nextIndex())
     }
     function prevImg() {
-        setActiveIndex(prev =>
-            prev === 0 ? vehicle.gallery.length - 1 : prev - 1
-        )
-
-
+        dispatch(prevIndex())
     }
-    function deleteImg(imgId) {
-        const updatedGallery = vehicle.gallery.filter(g => g.id !== imgId)
-
-        setVehicle({
-            ...vehicle,
-            gallery: updatedGallery
-        })
-
+    function deleteImage(imgId) {
+        dispatch(deleteImg(imgId))
     }
 
     return (
@@ -57,13 +46,13 @@ export default function GalleryVehicle() {
                     Gallery
                 </Title>
                 <GalleryWrapper>
-                    {vehicle.gallery.map((g, index) =>
+                    {filteredV?.gallery?.map((g, index) =>
                         <React.Fragment key={g.id} >
                             <GalleryItem size={g.size}>
-                                <Close onClick={() => deleteImg(g.id)} />
+                                <Close onClick={() => deleteImage(g.id)} />
                                 <img onClick={() => {
                                     closeModalka();
-                                    setActiveIndex(index)
+                                    dispatch(setActiveIndex(index))
                                 }} src={g.url} alt="vehicle photo" />
                             </GalleryItem>
                         </React.Fragment>
@@ -73,10 +62,10 @@ export default function GalleryVehicle() {
                 {modal && activeIndex !== null && (
                     <ModalWindow
                         closeModal={closeModalka}
-                        children={<img src={vehicle.gallery[activeIndex].url} />}
-                        prevImg={()=>
+                        children={<img src={filteredV.gallery[activeIndex].url} />}
+                        prevImg={() =>
                             prevImg()}
-                        nextImg={()=>
+                        nextImg={() =>
                             nextImg()}
                         prevSvg={<PrevIcon />}
                         nextSvg={<NextIcon />}
